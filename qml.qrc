@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>content/back_audi.png</file>
+        <file>content/background2.png</file>
+        <file>content/BatteryAlertIcon.png</file>
+        <file>content/EngineWarningIcon.png</file>
+        <file>content/ExitBtn.qml</file>
+        <file>content/FogLampIcon.png</file>
+        <file>content/FuelLowIcon.png</file>
+        <file>content/needle.png</file>
+        <file>content/needle2.png</file>
+        <file>content/odo_audi.png</file>
+        <file>content/OilPressureIcon.png</file>
+        <file>content/Overlay.png</file>
+        <file>content/quit.png</file>
+        <file>content/speedometer.png</file>
+        <file>content/Speedometer.qml</file>
+        <file>content/Taho.qml</file>
+        <file>content/taho_audi.png</file>
+        <file>content/TractionControlIcon.png</file>
+    </qresource>
+</RCC>
