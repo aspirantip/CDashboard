@@ -15,6 +15,7 @@ ApplicationWindow {
     width: Screen.width; height: Math.min(Screen.width, Screen.height)
 
     property int k : 0;
+    property bool fBtnClk : true;
 
     Rectangle {
         width: root.width;
@@ -136,7 +137,7 @@ ApplicationWindow {
         id: dialsRow
         spacing: 350
         anchors.centerIn: parent
-        Behavior on spacing {PropertyAnimation { duration: 450; easing.type: Easing.OutQuad}}
+        Behavior on spacing {PropertyAnimation { duration: 500; easing.type: Easing.OutQuad}}
 
         Speedometer {
             id: speedometer
@@ -155,8 +156,6 @@ ApplicationWindow {
     }
 
 
-
-
     Timer
     {
         interval: 1000; running: true; repeat: true
@@ -168,28 +167,60 @@ ApplicationWindow {
 
     Button
     {
-        id: firstbutton
+        id: button
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.margins: 50
         Text {
+            id: btnText
             text: "Hide dashboard"
             anchors.centerIn: parent
             color: "white"
             font.pixelSize: 20
         }
-        onClicked:
-        {
-            speedometer.scale = 0.85;
-            tahometer.scale = 0.85;
-            dialsRow.spacing = 450;
-            odo_audi.opacity = 0;
-            background.opacity = 0;
 
-            rightIndicator.on = false;
-            leftIndicator.on = false;
-        }
         style:  buttonStyle
+
+        scale: mouseHover.containsMouse ? 1.08 : 1.0
+
+        Behavior on scale { PropertyAnimation {}}
+
+        MouseArea {
+            id: mouseHover
+            anchors.fill: parent
+            anchors.margins: -20
+
+            hoverEnabled: true
+            onClicked:
+            {
+                if (fBtnClk)
+                {
+                    speedometer.scale = 0.85;
+                    tahometer.scale = 0.85;
+                    dialsRow.spacing = 400;
+                    odo_audi.opacity = 0;
+                    background.opacity = 0;
+
+                    rightIndicator.on = false;
+                    leftIndicator.on = false;
+                    fBtnClk = false;
+                    btnText.text = "Show dashboard";
+                }
+                else
+                {
+                    speedometer.scale = 1;
+                    tahometer.scale = 1;
+                    dialsRow.spacing = 350;
+                    odo_audi.opacity = 1;
+                    background.opacity = 1;
+
+                    rightIndicator.on = true;
+                    leftIndicator.on = true;
+                    fBtnClk = true;
+                    btnText.text = "Hide dashboard";
+                }
+            }
+        }
     }
 
     Component {
