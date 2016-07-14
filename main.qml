@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.4
 import "content"
 
 ApplicationWindow {
@@ -23,11 +24,16 @@ ApplicationWindow {
         id: background
         source: "content/back_audi.png"
         anchors.centerIn: parent
+
+        Behavior on opacity {PropertyAnimation {}}
     }
 
     Image {
+        id: odo_audi
         source: "content/odo_audi.png"
         anchors.centerIn: parent
+
+        Behavior on opacity {PropertyAnimation {}}
 
         Text
         {
@@ -80,9 +86,10 @@ ApplicationWindow {
         }
 
         Row {
-            spacing: 1
+            id: turnsRow
+            spacing: 250
             anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.height / 4
+            y: parent.height / 3.5
 
             TurnIndicator {
                 id: leftIndicator
@@ -90,21 +97,17 @@ ApplicationWindow {
                 width: height
                 height: root.height * 0.09
                 antialiasing: true
-
                 direction: Qt.LeftArrow
                 on: true
             }
 
-            Image {
+            /*Image {
                 source: "content/EngineWarningIcon.png"
-                scale: 1
             }
 
             Image {
                 source: "content/FogLampIcon.png"
-                scale: 1
-            }
-
+            }*/
 
             TurnIndicator {
                 id: rightIndicator
@@ -112,7 +115,6 @@ ApplicationWindow {
                 width: height
                 height: root.height * 0.09
                 antialiasing: true
-
                 direction: Qt.RightArrow
                 on: true
             }
@@ -121,24 +123,37 @@ ApplicationWindow {
 
     }
 
-    Speedometer {
-        id: dial
-        objectName: "dial"
-        anchors.left: background.left
-        anchors.verticalCenter: background.verticalCenter
+
+    Row {
+        id: dialsRow
+        spacing: 350
+        anchors.centerIn: parent
+        Behavior on spacing {PropertyAnimation { duration: 400; easing.type: Easing.OutQuad}}
+
+
+        Speedometer {
+            id: speedometer
+            objectName: "dial"
+
+            Behavior on scale {PropertyAnimation {}}
+        }
+
+        Taho {
+            id: tahometer
+
+            Behavior on scale {PropertyAnimation {}}
+
+        }
+
     }
 
-    Taho {
-        id: tahometer
-        anchors.right: background.right
-        anchors.verticalCenter: background.verticalCenter
-    }
 
     ExitBtn {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.margins: 20
     }
+
 
     Timer
     {
@@ -149,6 +164,44 @@ ApplicationWindow {
         }
     }
 
+    Button
+    {
+        id: firstbutton
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.margins: 50
+        Text {
+            text: "Hide dashboard"
+            anchors.centerIn: parent
+            color: "white"
+            font.pixelSize: 20
+        }
+        onClicked:
+        {
+            speedometer.scale = 0.85;
+            tahometer.scale = 0.85;
+            dialsRow.spacing = 450;
+            odo_audi.opacity = 0;
+            background.opacity = 0;
+
+            rightIndicator.on = false;
+            leftIndicator.on = false;
+        }
+        style:  buttonStyle
+    }
+
+    Component {
+        id: buttonStyle
+        ButtonStyle {
+            background: Rectangle {
+                implicitHeight: 35
+                implicitWidth: 224
+                radius: 4
+                color: control.pressed ? "#BDBDBD" : "#404040"
+                Behavior on color {ColorAnimation {}}
+            }
+        }
+    }
 
 
 }
