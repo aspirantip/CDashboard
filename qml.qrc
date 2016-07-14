@@ -19,5 +19,6 @@
         <file>content/Taho.qml</file>
         <file>content/taho_audi.png</file>
         <file>content/TractionControlIcon.png</file>
+        <file>content/TurnIndicator.qml</file>
     </qresource>
 </RCC>

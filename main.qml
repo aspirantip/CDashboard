@@ -11,7 +11,7 @@ ApplicationWindow {
 
     width: Screen.width; height: Math.min(Screen.width, Screen.height)
 
-    //property int k : 0;
+    property int k : 0;
 
     Rectangle {
         width: root.width;
@@ -37,7 +37,7 @@ ApplicationWindow {
             y: parent.height / 10
             color: "#FAFAFA";
             font.pointSize: 16
-            text: Qt.formatTime(new Date(),"hh:mm:ss")
+            text: Qt.formatTime(new Date(),"hh:mm")
         }
 
         Text {
@@ -53,29 +53,29 @@ ApplicationWindow {
         Text
         {
             id: fuelValue
-            y: parent.height / 1.185
+            y: parent.height / 1.17
             x: parent.width / 7.4
             color: "#FAFAFA";
-            font.pointSize: 18
+            font.pointSize: 14
             text: "6 L"
         }
 
         Text {
             id: accumValue
-            y: parent.height / 1.185
+            y: parent.height / 1.18
             x: parent.width / 2.05
             color: "#FAFAFA";
-            font.pointSize: 18
+            font.pointSize: 14
             text: "13.7 V";
         }
 
         Text
         {
             id: temperatureValue
-            y: parent.height / 1.185
+            y: parent.height / 1.17
             x: parent.width / 1.18
             color: "#FAFAFA";
-            font.pointSize: 18
+            font.pointSize: 14
             text: "88 C"
         }
 
@@ -84,10 +84,15 @@ ApplicationWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             y: parent.height / 4
 
-            Image {
-                id: oilIcon
-                source: "content/OilPressureIcon.png"
-                scale: 1
+            TurnIndicator {
+                id: leftIndicator
+                objectName: "leftIndicator"
+                width: height
+                height: root.height * 0.09
+                antialiasing: true
+
+                direction: Qt.LeftArrow
+                on: true
             }
 
             Image {
@@ -100,10 +105,18 @@ ApplicationWindow {
                 scale: 1
             }
 
-            Image {
-                source: "content/TractionControlIcon.png"
-                scale: 1
+
+            TurnIndicator {
+                id: rightIndicator
+                objectName: "rightIndicator"
+                width: height
+                height: root.height * 0.09
+                antialiasing: true
+
+                direction: Qt.RightArrow
+                on: true
             }
+
         }
 
     }
@@ -131,9 +144,7 @@ ApplicationWindow {
     {
         interval: 1000; running: true; repeat: true
         onTriggered: {
-            /*k++;
-            k % 2 != 0 ? oilIcon.opacity = 0.0 : oilIcon.opacity = 1.0;*/
-            time.text = Qt.formatTime(new Date(),"hh:mm:ss");
+            time.text = Qt.formatTime(new Date(),"hh:mm");
             date.text = Qt.formatDateTime(new Date(), "dd.MM.yy");
         }
     }
