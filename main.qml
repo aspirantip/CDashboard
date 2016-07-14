@@ -2,6 +2,8 @@ import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.4
+import QtPositioning 5.5
+import QtLocation 5.6
 import "content"
 
 ApplicationWindow {
@@ -26,6 +28,13 @@ ApplicationWindow {
         anchors.centerIn: parent
 
         Behavior on opacity {PropertyAnimation {}}
+    }
+
+
+    ExitBtn {
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: 20
     }
 
     Image {
@@ -123,17 +132,15 @@ ApplicationWindow {
 
     }
 
-
     Row {
         id: dialsRow
         spacing: 350
         anchors.centerIn: parent
-        Behavior on spacing {PropertyAnimation { duration: 400; easing.type: Easing.OutQuad}}
-
+        Behavior on spacing {PropertyAnimation { duration: 450; easing.type: Easing.OutQuad}}
 
         Speedometer {
             id: speedometer
-            objectName: "dial"
+            objectName: "speedometer"
 
             Behavior on scale {PropertyAnimation {}}
         }
@@ -148,11 +155,6 @@ ApplicationWindow {
     }
 
 
-    ExitBtn {
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.margins: 20
-    }
 
 
     Timer

@@ -42,12 +42,17 @@ import QtQuick 2.0
 
 Image {
     source: "quit.png"
-    scale: quitMouse.pressed ? 1.4 : 1.2
+
+    scale: quitMouse.containsMouse ? 1.2 : 1.0
+
+    Behavior on scale { PropertyAnimation {}}
 
     MouseArea {
         id: quitMouse
         anchors.fill: parent
-        anchors.margins: -10
+        anchors.margins: -20
+
+        hoverEnabled: true
         onClicked: Qt.quit()
     }
 }

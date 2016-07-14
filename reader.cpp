@@ -11,7 +11,7 @@ reader::reader(QObject *parent) : QObject(parent)
 
 void reader::timeOut()
 {
-    QObject* speedometer = this->parent()->findChild<QObject*>("dial");
+    QObject* speedometer = this->parent()->findChild<QObject*>("speedometer");
     QObject* speedText = this->parent()->findChild<QObject*>("speedText");
 
     if (fNeedleUp)
