@@ -31,7 +31,6 @@ ApplicationWindow {
         Behavior on opacity {PropertyAnimation {}}
     }
 
-
     ExitBtn {
         anchors.right: parent.right
         anchors.top: parent.top
@@ -137,24 +136,23 @@ ApplicationWindow {
         id: dialsRow
         spacing: 350
         anchors.centerIn: parent
-        Behavior on spacing {PropertyAnimation { duration: 500; easing.type: Easing.OutQuad}}
+        Behavior on spacing {PropertyAnimation { duration: 250; easing.type: Easing.OutQuad}}
 
         Speedometer {
             id: speedometer
             objectName: "speedometer"
 
-            Behavior on scale {PropertyAnimation {}}
+            Behavior on scale {PropertyAnimation { easing.type: Easing.OutQuad}}
         }
 
         Taho {
             id: tahometer
 
-            Behavior on scale {PropertyAnimation {}}
+            Behavior on scale {PropertyAnimation { easing.type: Easing.OutQuad}}
 
         }
 
     }
-
 
     Timer
     {
@@ -173,7 +171,7 @@ ApplicationWindow {
         anchors.margins: 50
         Text {
             id: btnText
-            text: "Hide dashboard"
+            text: "Switch to navigation"
             anchors.centerIn: parent
             color: "white"
             font.pixelSize: 20
@@ -200,11 +198,10 @@ ApplicationWindow {
                     dialsRow.spacing = 400;
                     odo_audi.opacity = 0;
                     background.opacity = 0;
-
                     rightIndicator.on = false;
                     leftIndicator.on = false;
                     fBtnClk = false;
-                    btnText.text = "Show dashboard";
+                    btnText.text = "Switch to dashboard";
                 }
                 else
                 {
@@ -213,11 +210,10 @@ ApplicationWindow {
                     dialsRow.spacing = 350;
                     odo_audi.opacity = 1;
                     background.opacity = 1;
-
                     rightIndicator.on = true;
                     leftIndicator.on = true;
                     fBtnClk = true;
-                    btnText.text = "Hide dashboard";
+                    btnText.text = "Switch to navigation";
                 }
             }
         }
@@ -235,6 +231,5 @@ ApplicationWindow {
             }
         }
     }
-
 
 }
