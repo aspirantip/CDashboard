@@ -2,8 +2,8 @@ import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.4
-import QtPositioning 5.5
-import QtLocation 5.6
+//import QtPositioning 5.5
+//import QtLocation 5.6
 import "content"
 
 ApplicationWindow {
@@ -103,11 +103,23 @@ ApplicationWindow {
             TurnIndicator {
                 id: leftIndicator
                 objectName: "leftIndicator"
-                width: height
-                height: root.height * 0.09
+
+                width: 50
+                height: 50
                 antialiasing: true
                 direction: Qt.LeftArrow
-                on: true
+                on: false
+            }
+
+
+            TurnIndicator {
+                id: rightIndicator
+                objectName: "rightIndicator"
+                width: 50
+                height: 50
+                antialiasing: true
+                direction: Qt.RightArrow
+                on: false
             }
 
             /*Image {
@@ -117,19 +129,7 @@ ApplicationWindow {
             Image {
                 source: "content/FogLampIcon.png"
             }*/
-
-            TurnIndicator {
-                id: rightIndicator
-                objectName: "rightIndicator"
-                width: height
-                height: root.height * 0.09
-                antialiasing: true
-                direction: Qt.RightArrow
-                on: true
-            }
-
         }
-
     }
 
     Row {
@@ -149,9 +149,7 @@ ApplicationWindow {
             id: tahometer
 
             Behavior on scale {PropertyAnimation { easing.type: Easing.OutQuad}}
-
         }
-
     }
 
     Timer
@@ -163,9 +161,11 @@ ApplicationWindow {
         }
     }
 
+    // navigation button
     Button
     {
         id: button
+        visible: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.margins: 50

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets sensors serialport
 
 CONFIG += c++11
 
@@ -13,7 +13,7 @@ RESOURCES += qml.qrc
 QML_IMPORT_PATH =
 
 # Default rules for deployment.
-include(deployment.pri)
+#include(deployment.pri)
 
 HEADERS += \
     reader.h
@@ -37,3 +37,7 @@ DISTFILES += \
     content/ExitBtn.qml \
     content/Speedometer.qml \
     content/Taho.qml
+
+target.path  = /home/pi/projects/dashboard
+target.files = /home/plotnikov/project/rpi/build/Dashboard-RPI2_Qt_5_6_2_GCC_32bit-Debug/dashboard
+INSTALLS += target

@@ -3,20 +3,41 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QTimer>
 
-class reader : public QObject
+#include <QtSerialPort/QSerialPort>
+#include <QSerialPortInfo>
+
+class Reader : public QObject
 {
     Q_OBJECT
 public:
-    explicit reader(QObject *parent = 0);
+    explicit Reader(QObject *parent = 0);
+    ~Reader();
 
-    QTimer timer;
-    uint16_t speedValue;
-    bool fNeedleUp;
+private:
+    void getInfoDevices();      // получаем информацию об устройствах подключенных к системе
+    void connectDevice();
+    void handlerError(QSerialPort::SerialPortError error);
+
+
+    QObject* speedometer;
+    QObject* speedText;
+    QObject* objLeftTurn;
+    QObject* objRightTurn;
+
+    QSerialPort srPort;
+
+    uint8_t valSpeed;
+    bool leftTurn;
+    bool rightTurn;
+
+
+signals:
+
+public slots:
 
 private slots:
-    void timeOut();
+    void slUpdate();
 };
 
 #endif // READER_H
